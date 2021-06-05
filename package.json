@@ -15,7 +15,7 @@
     "types": "./src/index.d.ts",
     "files": [
         "dist/**/*.js",
-        "./src/index.d.ts"
+        "src/**/*.ts"
     ],
     "scripts": {
         "build": "parcel build src/index.ts"
