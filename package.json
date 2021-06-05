@@ -12,6 +12,7 @@
             "outputFormat": "esmodule"
         }
     },
+    "types": "./src/index.d.ts",
     "files": [
         "dist/**/*.js",
         "./src/index.d.ts"
