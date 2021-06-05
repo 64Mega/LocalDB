@@ -13,7 +13,8 @@
         }
     },
     "files": [
-        "./src/**/*.d.ts"
+        "dist/**/*.js",
+        "./src/index.d.ts"
     ],
     "scripts": {
         "build": "parcel build src/index.ts"
