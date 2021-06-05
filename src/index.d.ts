@@ -1,42 +1,37 @@
-// Typings for LocalDB
-
-declare class LocalDB {
-    public get TableName(): string;
-    public constructor(tableName: string);
-    public Get(): Promise<DBRow[]>;
-    public GetById(id: number): Promise<DBRow>;
-    public Insert(row: any): Promise<DBRow>;
-    public Update(row: DBRow): Promise<DBRow>;
-    public DeleteById(id: number): Promise<boolean>;
-    public DeleteRow(row: DBRow): Promise<boolean>;
-    public Undelete(id: number): Promise<boolean>;
-    public Sort(
-        sortFunction?: (a: DBRow, b: DBRow) => number
-    ): Promise<LocalDB>;
-    public DeleteEntireDB(): void;
-}
-
-declare class DBTable<RowModel extends DBRow> {
-    protected _db: LocalDB;
-
-    public GetById(id: number): Promise<RowModel>;
-    public GetAll(): Promise<RowModel[]>;
-    public Insert(row: RowModel): Promise<RowModel>;
-    public DeleteRow(row: RowModel): Promise<boolean>;
-    public DeleteById(id: number): Promise<boolean>;
-    public Update(row: RowModel): Promise<RowModel>;
-    public SortData(): void;
-    public ReplaceData(newData: RowModel[], confirm: boolean): Promise<boolean>;
-    public MergeData(newData: RowModel[], confirm: boolean): Promise<boolean>;
-    public DeleteAll(areYouSure: boolean): Promise<boolean>;
-}
-
-declare interface DBRow {
+/**
+ * An interface defining minimal DBRow implementation.
+ * The `isDeleted` property is used to "soft delete" objects
+ */
+export interface DBRow {
     id?: number;
     isDeleted?: boolean;
 }
+export class LocalDB {
+    get TableName(): string;
+    constructor(tableName: string);
+    Get(): Promise<DBRow[]>;
+    GetById(id: number): Promise<DBRow>;
+    Insert(row: any): Promise<DBRow>;
+    Update(row: DBRow): Promise<DBRow>;
+    Undelete(id: number): Promise<DBRow>;
+    DeleteById(id: number, hardDelete?: boolean): Promise<boolean>;
+    DeleteRow(row: DBRow, hardDelete?: boolean): Promise<boolean>;
+    Sort(sortFunction?: (a: DBRow, b: DBRow) => number): Promise<LocalDB>;
+    DeleteEntireDB(): Promise<void>;
+}
+export class DBTable<RowModel extends DBRow> {
+    protected _db: LocalDB;
+    constructor(tableName: string);
+    GetByID(id: number): Promise<RowModel>;
+    GetAll(): Promise<RowModel[]>;
+    Insert(row: RowModel): Promise<RowModel>;
+    DeleteRow(row: RowModel): Promise<boolean>;
+    DeleteById(id: number): Promise<boolean>;
+    Update(row: RowModel): Promise<RowModel>;
+    protected SortData(): Promise<void>;
+    ReplaceData(newData: RowModel[], confirm?: boolean): Promise<boolean>;
+    MergeData(newData: RowModel[], confirm?: boolean): Promise<boolean>;
+    DeleteAll(areYouSure?: boolean): Promise<boolean>;
+}
 
-declare type DBStorageObject = {
-    rows: DBRow[];
-    _idgen: number;
-};
+//# sourceMappingURL=index.d.ts.map

@@ -21,6 +21,7 @@ class LocalDB {
     }
 
     constructor(tableName: string) {
+        console.info('Initializing LocalDB/' + tableName);
         this._tableName = tableName;
         this.ReadDB(true);
     }
@@ -121,9 +122,11 @@ class LocalDB {
     // Internal Methods
     private async ReadDB(createIfNotExists: boolean = false): Promise<boolean> {
         return new Promise(async (resolve, reject) => {
+            console.info('LocalDB: Reading from ' + this.TableName);
             const strStorageObject = localStorage.getItem(this.TableName);
             if (strStorageObject !== null) {
                 this._storage = JSON.parse(strStorageObject);
+                await this.WriteDB();
                 resolve(true);
             } else {
                 if (createIfNotExists) {
@@ -138,6 +141,7 @@ class LocalDB {
     private async WriteDB(): Promise<any> {
         return new Promise((resolve) => {
             const json = JSON.stringify(this._storage);
+            console.info('LocalDB: Writing to ' + this.TableName);
             localStorage.setItem(this.TableName, json);
             resolve(true);
         });
@@ -151,4 +155,4 @@ class LocalDB {
     }
 }
 
-export default LocalDB;
+export { LocalDB };

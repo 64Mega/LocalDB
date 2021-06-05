@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "ES6",
+        "esModuleInterop": true,
+        "lib": ["DOM", "ES2016"],
+        "target": "ES6"
+    },
+    "exclude": ["node_modules"]
+}

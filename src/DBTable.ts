@@ -4,7 +4,7 @@
  */
 
 import { DBRow } from './DBRow';
-import LocalDB from './LocalDB';
+import { LocalDB } from './LocalDB';
 
 class DBTable<RowModel extends DBRow> {
     protected _db: LocalDB = null;
@@ -93,4 +93,4 @@ class DBTable<RowModel extends DBRow> {
     }
 }
 
-export default DBTable;
+export { DBTable };
