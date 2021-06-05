@@ -9,6 +9,10 @@ import LocalDB from './LocalDB';
 class DBTable<RowModel extends DBRow> {
     protected _db: LocalDB = null;
 
+    constructor(tableName: string) {
+        this._db = new LocalDB(tableName);
+    }
+
     async GetByID(id: number): Promise<RowModel> {
         return (await this._db.GetById(id)) as RowModel;
     }
