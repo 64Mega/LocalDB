@@ -6,13 +6,20 @@
     "dependencies": {},
     "private": true,
     "main": "./dist/index.js",
+    "type": "module",
+    "targets": {
+        "main": {
+            "outputFormat": "esmodule"
+        }
+    },
     "files": [
         "./src/**/*.d.ts"
     ],
     "scripts": {
-        "build": "parcel build src/index.ts"
+        "build": "concurrently \"npm version patch\" \"parcel build src/index.ts\""
     },
     "devDependencies": {
+        "concurrently": "^6.2.0",
         "parcel": "^2.0.0-beta.3.1"
     }
 }
