@@ -2,7 +2,7 @@
     "name": "localdb",
     "description": "Simple wrapper around LocalStorage, providing some DB-like features",
     "authors": "Daniel Lawrence",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "private": true,
     "main": "./dist/index.js",
     "type": "module",
